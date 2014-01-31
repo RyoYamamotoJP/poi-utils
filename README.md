@@ -1,1 +1,2 @@
-# Utility methods for Apache POI
+# Utilities for Apache POI
+
