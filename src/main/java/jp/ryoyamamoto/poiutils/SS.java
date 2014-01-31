@@ -22,7 +22,6 @@ import org.apache.commons.lang3.reflect.FieldUtils;
 import org.apache.poi.ss.usermodel.Cell;
 import org.apache.poi.ss.usermodel.Hyperlink;
 import org.apache.poi.ss.usermodel.Sheet;
-import org.apache.poi.ss.util.AreaReference;
 import org.apache.poi.ss.util.CellRangeAddress;
 import org.apache.poi.ss.util.CellReference;
 
@@ -93,8 +92,8 @@ public class SS {
      */
     public static void merge(Sheet sheet, CellRangeAddress range) {
         boolean copied = false;
-        Cell upperLeftCell = getCell(sheet, getFirstCellReference(range));
-        for (CellReference reference : getCellReferences(range)) {
+        Cell upperLeftCell = getCell(sheet, Ranges.getFirstCellReference(range));
+        for (CellReference reference : Ranges.getCellReferences(range)) {
             Cell cell = getCell(sheet, reference);
             if (copied == false && isNotBlank(cell)) {
                 copy(cell, upperLeftCell);
@@ -154,24 +153,6 @@ public class SS {
 
     private static Cell getCell(Sheet sheet, CellReference ref) {
         return getCell(sheet, ref.getRow(), ref.getCol());
-    }
-
-    private static CellReference getFirstCellReference(CellRangeAddress range) {
-        return new CellReference(range.getFirstRow(), range.getFirstColumn());
-    }
-
-    private static CellReference getLastCellReference(CellRangeAddress range) {
-        return new CellReference(range.getLastRow(), range.getLastColumn());
-    }
-
-    private static CellReference[] getCellReferences(CellRangeAddress range) {
-        return toAreaReference(range).getAllReferencedCells();
-    }
-
-    private static AreaReference toAreaReference(CellRangeAddress range) {
-        CellReference topLeft = getFirstCellReference(range);
-        CellReference botRight = getLastCellReference(range);
-        return new AreaReference(topLeft, botRight);
     }
 
     private static Sheet getSheet(Cell cell) {
