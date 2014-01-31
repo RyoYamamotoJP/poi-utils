@@ -31,9 +31,6 @@ import org.apache.poi.ss.util.CellReference;
  */
 public class Sheets {
 
-    /*
-     * Public methods
-     */
     /**
      * Gets the cell at the specified row and column.
      * 
