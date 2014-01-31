@@ -26,9 +26,6 @@ import org.apache.poi.ss.util.CellReference;
  */
 public class Ranges {
 
-    /*
-     * Public methods
-     */
     /**
      * Gets the reference of the upper-left most cell in the range.
      * 
@@ -62,9 +59,6 @@ public class Ranges {
         return toAreaReference(range).getAllReferencedCells();
     }
 
-    /*
-     * Private methods
-     */
     /**
      * Converts a range to a {@link AreaReference}.
      * 
@@ -72,7 +66,7 @@ public class Ranges {
      *            the range of cells
      * @return the reference of the area
      */
-    private static AreaReference toAreaReference(CellRangeAddress range) {
+    public static AreaReference toAreaReference(CellRangeAddress range) {
         return new AreaReference(range.formatAsString());
     }
 }
