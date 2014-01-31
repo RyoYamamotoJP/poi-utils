@@ -15,10 +15,8 @@
  */
 package jp.ryoyamamoto.poiutils;
 
-import java.util.Collections;
 import java.util.List;
 
-import org.apache.commons.lang3.reflect.FieldUtils;
 import org.apache.poi.ss.usermodel.Cell;
 import org.apache.poi.ss.usermodel.Hyperlink;
 import org.apache.poi.ss.usermodel.Sheet;
@@ -92,9 +90,10 @@ public class SS {
      */
     public static void merge(Sheet sheet, CellRangeAddress range) {
         boolean copied = false;
-        Cell upperLeftCell = getCell(sheet, Ranges.getFirstCellReference(range));
+        Cell upperLeftCell = Sheets.getCell(sheet,
+                Ranges.getFirstCellReference(range));
         for (CellReference reference : Ranges.getCellReferences(range)) {
-            Cell cell = getCell(sheet, reference);
+            Cell cell = Sheets.getCell(sheet, reference);
             if (copied == false && isNotBlank(cell)) {
                 copy(cell, upperLeftCell);
                 copied = true;
@@ -147,14 +146,6 @@ public class SS {
         }
     }
 
-    private static Cell getCell(Sheet sheet, int row, int col) {
-        return sheet.getRow(row).getCell(col);
-    }
-
-    private static Cell getCell(Sheet sheet, CellReference ref) {
-        return getCell(sheet, ref.getRow(), ref.getCol());
-    }
-
     private static Sheet getSheet(Cell cell) {
         return cell.getRow().getSheet();
     }
@@ -173,18 +164,7 @@ public class SS {
         }
 
         Sheet sheet = getSheet(cell);
-        List<Hyperlink> hyperlinks = getHyperlinks(sheet);
+        List<Hyperlink> hyperlinks = Sheets.getHyperlinks(sheet);
         hyperlinks.remove(cell.getHyperlink());
-    }
-
-    @SuppressWarnings("unchecked")
-    private static List<Hyperlink> getHyperlinks(Sheet sheet) {
-        try {
-            return (List<Hyperlink>) FieldUtils.readDeclaredField(sheet,
-                    "hyperlinks", true);
-        } catch (IllegalAccessException e) {
-            e.printStackTrace();
-        }
-        return Collections.emptyList();
     }
 }
