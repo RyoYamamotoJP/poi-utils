@@ -62,39 +62,11 @@ public class Sheets {
     }
 
     /**
-     * Gets the cell at the specified row and column.
-     * 
-     * @param sheet
-     *            the sheet
-     * @param row
-     *            the row of the cell
-     * @param col
-     *            the column of the cell
-     * @return the cell at the specified row and column
-     */
-    public static Cell getCell(Sheet sheet, int row, int col) {
-        return sheet.getRow(row).getCell(col);
-    }
-
-    /**
-     * Gets the cell at the specified reference.
-     * 
-     * @param sheet
-     *            the sheet
-     * @param reference
-     *            the reference of the cell
-     * @return the cell at the specified reference
-     */
-    public static Cell getCell(Sheet sheet, CellReference reference) {
-        return getCell(sheet, reference.getRow(), reference.getCol());
-    }
-
-    /**
      * Gets the hyperlinks on the sheet.
      * 
      * @param sheet
-     *            the sheet
-     * @return the hyperlinks on the sheet
+     *            the sheet.
+     * @return the hyperlinks on the sheet.
      */
     @SuppressWarnings("unchecked")
     public static List<Hyperlink> getHyperlinks(Sheet sheet) {
@@ -105,5 +77,33 @@ public class Sheets {
             e.printStackTrace();
         }
         return Collections.emptyList();
+    }
+
+    /**
+     * Gets the cell at the specified reference.
+     * 
+     * @param sheet
+     *            the sheet.
+     * @param reference
+     *            the reference of the cell.
+     * @return the cell at the specified reference.
+     */
+    public static Cell getCell(Sheet sheet, CellReference reference) {
+        return getCell(sheet, reference.getRow(), reference.getCol());
+    }
+
+    /**
+     * Gets the cell at the specified row and column.
+     * 
+     * @param sheet
+     *            the sheet.
+     * @param row
+     *            the row of the cell.
+     * @param col
+     *            the column of the cell.
+     * @return the cell at the specified row and column.
+     */
+    public static Cell getCell(Sheet sheet, int row, int col) {
+        return sheet.getRow(row).getCell(col);
     }
 }

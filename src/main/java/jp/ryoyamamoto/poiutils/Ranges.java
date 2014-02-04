@@ -30,8 +30,8 @@ public class Ranges {
      * Gets the reference of the upper-left most cell in the range.
      * 
      * @param range
-     *            the range of cells
-     * @return the reference of the upper-left most cell in the range
+     *            the range of cells.
+     * @return the reference of the upper-left most cell in the range.
      */
     public static CellReference getFirstCellReference(CellRangeAddress range) {
         return toAreaReference(range).getFirstCell();
@@ -41,7 +41,7 @@ public class Ranges {
      * Gets the reference of the lower-right most cell in the range.
      * 
      * @param range
-     *            the range of cells
+     *            the range of cells.
      * @return the reference of the lower-right most cell in the range
      */
     public static CellReference getLastCellReference(CellRangeAddress range) {
@@ -52,19 +52,19 @@ public class Ranges {
      * Gets the references of all cells in the range.
      * 
      * @param range
-     *            the range of cells
-     * @return the references of all cells in the range
+     *            the range of cells.
+     * @return the references of all cells in the range.
      */
     public static CellReference[] getCellReferences(CellRangeAddress range) {
         return toAreaReference(range).getAllReferencedCells();
     }
 
     /**
-     * Converts a range to a {@link AreaReference}.
+     * Converts a range to an {@link AreaReference}.
      * 
      * @param range
-     *            the range of cells
-     * @return the reference of the area
+     *            the range of cells.
+     * @return the reference of the area.
      */
     public static AreaReference toAreaReference(CellRangeAddress range) {
         return new AreaReference(range.formatAsString());

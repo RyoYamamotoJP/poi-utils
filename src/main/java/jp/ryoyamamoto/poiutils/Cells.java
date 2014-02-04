@@ -134,10 +134,6 @@ public class Cells {
         }
     }
 
-    private static Sheet getSheet(Cell cell) {
-        return cell.getRow().getSheet();
-    }
-
     private static void removeHyperlink(Cell cell) {
         if (cell == null || cell.getHyperlink() == null) {
             return;
@@ -146,5 +142,9 @@ public class Cells {
         Sheet sheet = getSheet(cell);
         List<Hyperlink> hyperlinks = Sheets.getHyperlinks(sheet);
         hyperlinks.remove(cell.getHyperlink());
+    }
+
+    private static Sheet getSheet(Cell cell) {
+        return cell.getRow().getSheet();
     }
 }
