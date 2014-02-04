@@ -20,8 +20,6 @@ import java.util.List;
 import org.apache.poi.ss.usermodel.Cell;
 import org.apache.poi.ss.usermodel.Hyperlink;
 import org.apache.poi.ss.usermodel.Sheet;
-import org.apache.poi.ss.util.CellRangeAddress;
-import org.apache.poi.ss.util.CellReference;
 
 /**
  * Utility methods for SS.
@@ -77,32 +75,25 @@ public class SS {
     }
 
     /**
-     * Merges two or more adjacent cells.
-     * <p>
-     * Only the data in the upper-left cell of a range will remain in the merged
-     * cell. Data in other cells of the range will be deleted.
-     * </p>
+     * Returns {@code true} if the cell is blank or {@code null}.
      * 
-     * @param sheet
-     *            the sheet that the range is on.
-     * @param range
-     *            the range to merge.
+     * @param cell
+     *            the cell to test.
+     * @return {@code true} if the cell is blank or {@code null}.
      */
-    public static void merge(Sheet sheet, CellRangeAddress range) {
-        boolean copied = false;
-        Cell upperLeftCell = Sheets.getCell(sheet,
-                Ranges.getFirstCellReference(range));
-        for (CellReference reference : Ranges.getCellReferences(range)) {
-            Cell cell = Sheets.getCell(sheet, reference);
-            if (copied == false && isNotBlank(cell)) {
-                copy(cell, upperLeftCell);
-                copied = true;
-            }
-            if (cell != upperLeftCell) {
-                clear(cell);
-            }
-        }
-        sheet.addMergedRegion(range);
+    public static boolean isBlank(Cell cell) {
+        return cell == null || cell.getCellType() == Cell.CELL_TYPE_BLANK;
+    }
+
+    /**
+     * Returns {@code true} if the cell is not blank.
+     * 
+     * @param cell
+     *            the cell to test.
+     * @return {@code true} if the cell is not blank.
+     */
+    public static boolean isNotBlank(Cell cell) {
+        return !isBlank(cell);
     }
 
     /*
@@ -148,14 +139,6 @@ public class SS {
 
     private static Sheet getSheet(Cell cell) {
         return cell.getRow().getSheet();
-    }
-
-    private static boolean isBlank(Cell cell) {
-        return cell == null || cell.getCellType() == Cell.CELL_TYPE_BLANK;
-    }
-
-    private static boolean isNotBlank(Cell cell) {
-        return !isBlank(cell);
     }
 
     private static void removeHyperlink(Cell cell) {

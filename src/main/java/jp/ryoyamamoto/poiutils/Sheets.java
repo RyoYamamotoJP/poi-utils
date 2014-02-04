@@ -22,6 +22,7 @@ import org.apache.commons.lang3.reflect.FieldUtils;
 import org.apache.poi.ss.usermodel.Cell;
 import org.apache.poi.ss.usermodel.Hyperlink;
 import org.apache.poi.ss.usermodel.Sheet;
+import org.apache.poi.ss.util.CellRangeAddress;
 import org.apache.poi.ss.util.CellReference;
 
 /**
@@ -30,6 +31,35 @@ import org.apache.poi.ss.util.CellReference;
  * @author Ryo Yamamoto
  */
 public class Sheets {
+
+    /**
+     * Merges two or more adjacent cells.
+     * <p>
+     * Only the data in the upper-left cell of a range will remain in the merged
+     * cell. Data in other cells of the range will be deleted.
+     * </p>
+     * 
+     * @param sheet
+     *            the sheet that the range is on.
+     * @param range
+     *            the range to merge.
+     */
+    public static void merge(Sheet sheet, CellRangeAddress range) {
+        boolean copied = false;
+        Cell upperLeftCell = Sheets.getCell(sheet,
+                Ranges.getFirstCellReference(range));
+        for (CellReference reference : Ranges.getCellReferences(range)) {
+            Cell cell = Sheets.getCell(sheet, reference);
+            if (copied == false && SS.isNotBlank(cell)) {
+                SS.copy(cell, upperLeftCell);
+                copied = true;
+            }
+            if (cell != upperLeftCell) {
+                SS.clear(cell);
+            }
+        }
+        sheet.addMergedRegion(range);
+    }
 
     /**
      * Gets the cell at the specified row and column.

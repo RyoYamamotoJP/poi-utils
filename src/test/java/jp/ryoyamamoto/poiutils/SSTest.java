@@ -10,10 +10,8 @@ import org.apache.poi.ss.usermodel.CreationHelper;
 import org.apache.poi.ss.usermodel.Drawing;
 import org.apache.poi.ss.usermodel.FormulaError;
 import org.apache.poi.ss.usermodel.Hyperlink;
-import org.apache.poi.ss.usermodel.Row;
 import org.apache.poi.ss.usermodel.Sheet;
 import org.apache.poi.ss.usermodel.Workbook;
-import org.apache.poi.ss.util.CellRangeAddress;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 import org.junit.Before;
 import org.junit.Test;
@@ -337,43 +335,6 @@ public class SSTest {
         private Workbook createWorkbook() {
             Workbook workbook = new XSSFWorkbook();
             workbook.createSheet().createRow(0).createCell(0).setCellValue(1);
-            return workbook;
-        }
-    }
-
-    public static class WhenYouMergeTwoOrMoreCells {
-
-        private Sheet sheet;
-        private CellRangeAddress range;
-
-        @Before
-        public void setUp() throws Exception {
-            sheet = createWorkbook().getSheetAt(0);
-            range = new CellRangeAddress(0, 1, 0, 1);
-        }
-
-        @Test
-        public void onlyTheValueInTheUpperLeftCellShouldRemain() {
-            SS.merge(sheet, range);
-            assertThat(sheet.getRow(0).getCell(0).getStringCellValue())
-                    .isEqualTo("A1");
-            assertThat(sheet.getRow(0).getCell(1).getCellType()).isEqualTo(
-                    Cell.CELL_TYPE_BLANK);
-            assertThat(sheet.getRow(1).getCell(0).getCellType()).isEqualTo(
-                    Cell.CELL_TYPE_BLANK);
-            assertThat(sheet.getRow(1).getCell(1).getCellType()).isEqualTo(
-                    Cell.CELL_TYPE_BLANK);
-        }
-
-        private Workbook createWorkbook() {
-            Workbook workbook = new XSSFWorkbook();
-            Sheet sheet = workbook.createSheet();
-            Row row1 = sheet.createRow(0);
-            row1.createCell(0).setCellValue("A1");
-            row1.createCell(1).setCellValue("B1");
-            Row row2 = sheet.createRow(1);
-            row2.createCell(0).setCellValue("A2");
-            row2.createCell(1).setCellValue("B2");
             return workbook;
         }
     }
