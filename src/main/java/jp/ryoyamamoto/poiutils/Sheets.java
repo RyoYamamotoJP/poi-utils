@@ -50,12 +50,12 @@ public class Sheets {
                 Ranges.getFirstCellReference(range));
         for (CellReference reference : Ranges.getCellReferences(range)) {
             Cell cell = Sheets.getCell(sheet, reference);
-            if (copied == false && SS.isNotBlank(cell)) {
-                SS.copy(cell, upperLeftCell);
+            if (copied == false && Cells.isNotBlank(cell)) {
+                Cells.copy(cell, upperLeftCell);
                 copied = true;
             }
             if (cell != upperLeftCell) {
-                SS.clear(cell);
+                Cells.clear(cell);
             }
         }
         sheet.addMergedRegion(range);

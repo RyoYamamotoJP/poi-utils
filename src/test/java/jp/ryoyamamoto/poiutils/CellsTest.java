@@ -19,7 +19,7 @@ import org.junit.experimental.runners.Enclosed;
 import org.junit.runner.RunWith;
 
 @RunWith(Enclosed.class)
-public class SSTest {
+public class CellsTest {
 
     public static class WhenYouCopyFromANumericCellToAnother {
 
@@ -35,13 +35,13 @@ public class SSTest {
 
         @Test
         public void theCellTypeOfTheTargetCellShouldBeNumeric() {
-            SS.copy(source, target);
+            Cells.copy(source, target);
             assertThat(target.getCellType()).isEqualTo(Cell.CELL_TYPE_NUMERIC);
         }
 
         @Test
         public void theNumericValueOfTheTargetCellShouldBeReadable() {
-            SS.copy(source, target);
+            Cells.copy(source, target);
             assertThat(target.getNumericCellValue()).isEqualTo(1);
         }
 
@@ -66,13 +66,13 @@ public class SSTest {
 
         @Test
         public void theCellTypeOfTheTargetCellShouldBeString() {
-            SS.copy(source, target);
+            Cells.copy(source, target);
             assertThat(target.getCellType()).isEqualTo(Cell.CELL_TYPE_STRING);
         }
 
         @Test
         public void theStringValueOfTheTargetCellShouldBeReadable() {
-            SS.copy(source, target);
+            Cells.copy(source, target);
             assertThat(target.getStringCellValue()).isEqualTo("string");
         }
 
@@ -98,13 +98,13 @@ public class SSTest {
 
         @Test
         public void theCellTypeOfTheTargetCellShouldBeFormula() {
-            SS.copy(source, target);
+            Cells.copy(source, target);
             assertThat(target.getCellType()).isEqualTo(Cell.CELL_TYPE_FORMULA);
         }
 
         @Test
         public void theFormulaOfTheTargetCellShouldBeReadable() {
-            SS.copy(source, target);
+            Cells.copy(source, target);
             assertThat(target.getCellFormula()).isEqualTo("SUM(B1:C1)");
         }
 
@@ -131,44 +131,44 @@ public class SSTest {
 
         @Test
         public void theCellTypeOfTheTargetCellShouldBeBlank() {
-            SS.copy(source, target);
+            Cells.copy(source, target);
             assertThat(target.getCellType()).isEqualTo(Cell.CELL_TYPE_BLANK);
         }
 
         @Test
         public void theNumericValueOfTheTargetCellShouldBeZero() {
-            SS.copy(source, target);
+            Cells.copy(source, target);
             assertThat(target.getNumericCellValue()).isZero();
         }
 
         @Test
         public void theStringValueOfTheTargetCellShouldBeEmpty() {
-            SS.copy(source, target);
+            Cells.copy(source, target);
             assertThat(target.getStringCellValue()).isEqualTo("");
         }
 
         @Test
         public void theBooleanValueOfTheTargetCellShouldBeFalse() {
-            SS.copy(source, target);
+            Cells.copy(source, target);
             assertThat(target.getBooleanCellValue()).isFalse();
         }
 
         @Test
         public void theStyleOfTheTargetCellShouldBeDefault() {
-            SS.copy(source, target);
+            Cells.copy(source, target);
             assertThat(target.getCellStyle()).isEqualTo(
                     workbook.getCellStyleAt((short) 0));
         }
 
         @Test
         public void theCommentOfTheTargetCellShouldBeNull() {
-            SS.copy(source, target);
+            Cells.copy(source, target);
             assertThat(target.getCellComment()).isNull();
         }
 
         @Test
         public void theHyperlinkOfTheTargetCellShouldBeNull() {
-            SS.copy(source, target);
+            Cells.copy(source, target);
             assertThat(target.getHyperlink()).isNull();
         }
 
@@ -210,13 +210,13 @@ public class SSTest {
 
         @Test
         public void theCellTypeOfTheTargetCellShouldBeBoolean() {
-            SS.copy(source, target);
+            Cells.copy(source, target);
             assertThat(target.getCellType()).isEqualTo(Cell.CELL_TYPE_BOOLEAN);
         }
 
         @Test
         public void theBooleanValueOfTheTargetCellShouldBeReadable() {
-            SS.copy(source, target);
+            Cells.copy(source, target);
             assertThat(target.getBooleanCellValue()).isTrue();
         }
 
@@ -242,13 +242,13 @@ public class SSTest {
 
         @Test
         public void theCellTypeOfTheTargetCellShouldBeError() {
-            SS.copy(source, target);
+            Cells.copy(source, target);
             assertThat(target.getCellType()).isEqualTo(Cell.CELL_TYPE_ERROR);
         }
 
         @Test
         public void theErrorValueOfTheTargetCellShouldBeReadable() {
-            SS.copy(source, target);
+            Cells.copy(source, target);
             assertThat(target.getErrorCellValue()).isEqualTo(
                     FormulaError.DIV0.getCode());
         }
@@ -276,21 +276,21 @@ public class SSTest {
 
         @Test
         public void theStyleOfTheTargetCellShouldNotBeDefault() {
-            SS.copy(source, target);
+            Cells.copy(source, target);
             assertThat(target.getCellStyle()).isNotEqualTo(
                     workbook.getCellStyleAt((short) 0));
         }
 
         @Test
         public void theCommentOfTheTargetCellShouldBeReadable() {
-            SS.copy(source, target);
+            Cells.copy(source, target);
             assertThat(target.getCellComment().getString().getString())
                     .isEqualTo("Comment");
         }
 
         @Test
         public void theHyperlinkOfTheTargetCellShouldBeReadable() {
-            SS.copy(source, target);
+            Cells.copy(source, target);
             assertThat(target.getHyperlink().getAddress()).isEqualTo(
                     "https://github.com/RyoYamamotoJP");
         }
@@ -328,7 +328,7 @@ public class SSTest {
 
         @Test
         public void theCellTypeOfTheTargetCellShouldBeBlank() {
-            SS.clear(target);
+            Cells.clear(target);
             assertThat(target.getCellType()).isEqualTo(Cell.CELL_TYPE_BLANK);
         }
 

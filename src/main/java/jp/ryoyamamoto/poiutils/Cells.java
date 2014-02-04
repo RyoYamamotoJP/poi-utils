@@ -22,14 +22,11 @@ import org.apache.poi.ss.usermodel.Hyperlink;
 import org.apache.poi.ss.usermodel.Sheet;
 
 /**
- * Utility methods for SS.
+ * Utility methods for {@link Cell}.
  * 
  * @author Ryo Yamamoto
  */
-public class SS {
-
-    private SS() {
-    }
+public class Cells {
 
     /*
      * Public methods
